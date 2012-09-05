@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KillDBG", "KillDBG\KillDBG.vcxproj", "{759142F5-7BB6-4FB1-9DA4-21D7F47D65B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B24F157C-09E4-4E51-B805-6B98EC94F29C} = {B24F157C-09E4-4E51-B805-6B98EC94F29C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Scintilla", "Scintilla\Scintilla.vcxproj", "{B24F157C-09E4-4E51-B805-6B98EC94F29C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{759142F5-7BB6-4FB1-9DA4-21D7F47D65B2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{759142F5-7BB6-4FB1-9DA4-21D7F47D65B2}.Debug|Win32.Build.0 = Debug|Win32
+		{759142F5-7BB6-4FB1-9DA4-21D7F47D65B2}.Release|Win32.ActiveCfg = Release|Win32
+		{759142F5-7BB6-4FB1-9DA4-21D7F47D65B2}.Release|Win32.Build.0 = Release|Win32
+		{B24F157C-09E4-4E51-B805-6B98EC94F29C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B24F157C-09E4-4E51-B805-6B98EC94F29C}.Debug|Win32.Build.0 = Debug|Win32
+		{B24F157C-09E4-4E51-B805-6B98EC94F29C}.Release|Win32.ActiveCfg = Release|Win32
+		{B24F157C-09E4-4E51-B805-6B98EC94F29C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
