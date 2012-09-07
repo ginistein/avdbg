@@ -40,20 +40,26 @@ void CFileOpenDlg::OnBnClickedOk()
 {
 	if (!GetDlgItemText(IDC_EDITFILEPATH,m_strPath))
 	{
-		MessageBox(L"请输入可执行文件的路径");
+		MessageBox(_T("请输入可执行文件的路径"));
 		return;
 	}
 	GetDlgItemText(IDC_EDITPARAM,m_strParam);
+	GetDlgItemText(IDC_EDITRUNDIR,m_strRunDir);
 	CDialogEx::OnOK();
 }
 
 
 void CFileOpenDlg::OnBnClickedButtonbrowse()
 {
-	CFileDialog	dlg(TRUE,L".exe",NULL,OFN_DONTADDTORECENT | OFN_ENABLESIZING | OFN_FORCESHOWHIDDEN | OFN_HIDEREADONLY,L"可执行文件 (*.exe)|*.exe|所有文件 (*.*)|*.*||",this);
+	CFileDialog	dlg(TRUE,_T(".exe"),NULL,OFN_DONTADDTORECENT | OFN_ENABLESIZING | OFN_FORCESHOWHIDDEN | OFN_HIDEREADONLY,
+		_T("可执行文件 (*.exe)|*.exe|所有文件 (*.*)|*.*||"),this);
 	if (dlg.DoModal() != IDOK)
 	{
 		return;
 	}
-	SetDlgItemText(IDC_EDITFILEPATH,dlg.GetPathName());
+
+	CString strExePath(dlg.GetPathName());
+	SetDlgItemText(IDC_EDITFILEPATH,strExePath);
+
+	SetDlgItemText(IDC_EDITRUNDIR,strExePath.Left(strExePath.ReverseFind('\\')+1));
 }

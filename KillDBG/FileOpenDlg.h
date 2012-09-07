@@ -16,6 +16,7 @@ public:
 
 	CString	m_strPath;
 	CString	m_strParam;
+	CString m_strRunDir;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö

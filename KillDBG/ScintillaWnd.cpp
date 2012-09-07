@@ -38,6 +38,12 @@ BOOL CScintillaWnd::Create( DWORD dwExStyle, DWORD dwStyle,const RECT& rect, CWn
 		return FALSE;
 	}
 
+	this->SciFnDirect(SCI_CLEARALL);
+	this->SciFnDirect(EM_EMPTYUNDOBUFFER);
+	this->SciFnDirect(SCI_SETSAVEPOINT);
+	this->SciFnDirect(SCI_CANCEL);
+	this->SciFnDirect(SCI_SETUNDOCOLLECTION,0);
+// 	this->SciFnDirect(SCI_SETCODEPAGE,SC_CP_UTF8);
 	return TRUE;
 }
 

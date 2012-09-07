@@ -69,5 +69,9 @@
 #endif
 #endif
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <XTToolkitPro.h>    // Xtreme Toolkit Pro components
 #include <afxcontrolbars.h>
+
+#include <psapi.h>

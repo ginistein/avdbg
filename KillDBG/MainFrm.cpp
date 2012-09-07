@@ -238,7 +238,7 @@ BOOL CMainFrame::SetupDockPane(void)
 	if (m_wndOutput.Create(NULL,WS_CHILD | WS_VISIBLE, CRect(0, 0, 0, 0), this, 0))
 	{
 		m_wndOutput.SciFnDirect(SCI_SETMARGINWIDTHN,1,0);	//去掉Margin
-		m_wndOutput.SciFnDirect(SCI_SETREADONLY,1);
+		//m_wndOutput.SciFnDirect(SCI_SETREADONLY,1);
 		m_wndOutput.SciFnDirect(SCI_SETHSCROLLBAR,0);
 	}
 
@@ -373,16 +373,15 @@ LRESULT CMainFrame::OnDockingPaneNotify(WPARAM wParam, LPARAM lParam)
 				pPane->Attach(&m_wndMemory);
 				break;
 			case IDR_PANE_OUTPUT:
-				pPane->Attach(&m_wndStack);
+				pPane->Attach(&m_wndOutput);
 				break;
 			case IDR_PANE_STACK:
-				pPane->Attach(&m_wndOutput);
+				pPane->Attach(&m_wndStack);
 				break;
 			}
 			return TRUE;
 		}
-	}
-	return FALSE;
+	}	return FALSE;
 }
 
 
@@ -433,11 +432,13 @@ void CMainFrame::OnFileOpen()
 
 	m_strExePath = dlg.m_strPath;
 	m_strParam = dlg.m_strParam;
+	m_strRunDir = dlg.m_strRunDir;
+	
 	DWORD	dwThreadID;
 	m_hDebugThread = CreateThread(NULL,0,&DebugThreadProc,this,NULL,&dwThreadID);
 	if (m_hDebugThread == INVALID_HANDLE_VALUE)
 	{
-		MessageBox(L"创建调试线程失败",NULL,MB_OK | MB_ICONERROR);
+		MessageBox(_T("创建调试线程失败"),NULL,MB_OK | MB_ICONERROR);
 		return;
 	}
 }

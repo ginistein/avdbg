@@ -6,6 +6,7 @@
 
 #include "ChildView.h"
 #include "ScintillaWnd.h"
+#include "OutputWnd.h"
 
 class CMainFrame : public CXTPFrameWnd
 {
@@ -23,13 +24,14 @@ public:
 	HANDLE	m_hDebugThread;
 	CString	m_strExePath;
 	CString	m_strParam;
+	CString m_strRunDir;
 
 	CXTPOfficeBorder<CScintillaWnd> m_wndRegister;
 	//CXTPOfficeBorder<CEdit> m_wndProperties;
 	CXTPOfficeBorder<CScintillaWnd> m_wndDisasm;
 	CXTPOfficeBorder<CScintillaWnd> m_wndMemory;
 	CXTPOfficeBorder<CScintillaWnd> m_wndStack;
-	CXTPOfficeBorder<CScintillaWnd> m_wndOutput;
+	CXTPOfficeBorder<COutputWnd> m_wndOutput;
 
 
 #ifdef _DEBUG

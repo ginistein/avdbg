@@ -12,6 +12,8 @@
 #define IDC_BUTTONBROWSE                1001
 #define IDC_EDIT2                       1002
 #define IDC_EDITPARAM                   1002
+#define IDC_EDITPARAM2                  1003
+#define IDC_EDITRUNDIR                  1003
 #define IDR_PANE_REGISTER               4000
 #define IDR_PANE_DISASM                 4001
 #define IDR_PANE_OUTPUT                 4002
