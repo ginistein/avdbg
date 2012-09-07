@@ -16,7 +16,7 @@
 
 BEGIN_MESSAGE_MAP(CKillDBGApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, &CKillDBGApp::OnAppAbout)
-//	ON_COMMAND(ID_BUTTONDISWND, &CKillDBGApp::OnButtondiswnd)
+	//	ON_COMMAND(ID_BUTTONDISWND, &CKillDBGApp::OnButtondiswnd)
 END_MESSAGE_MAP()
 
 
@@ -64,6 +64,37 @@ BOOL CKillDBGApp::InitInstance()
 	SetRegistryKey(_T("KillDBG"));
 	// To create the main window, this code creates a new frame window
 	// object and then sets it as the application's main window object
+
+	//提升自身到 Debug Privilege
+	HANDLE hProcess=GetCurrentProcess();
+	HANDLE hToken;
+	BOOL bRet=FALSE;
+
+	if (OpenProcessToken(hProcess, TOKEN_ADJUST_PRIVILEGES, &hToken))
+	{
+		LUID luid;
+
+		if (LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &luid))
+		{
+			TOKEN_PRIVILEGES tp;
+
+			tp.PrivilegeCount=1;
+			tp.Privileges[0].Luid=luid;
+			tp.Privileges[0].Attributes=SE_PRIVILEGE_ENABLED;
+			if (AdjustTokenPrivileges(hToken, FALSE, &tp, NULL, (PTOKEN_PRIVILEGES)NULL, (PDWORD)NULL))
+			{
+				bRet=(GetLastError() == ERROR_SUCCESS);
+			}
+		}
+		CloseHandle(hToken);
+	}
+
+	if (!bRet)
+	{
+		MessageBox(NULL,_T("提升进程权限到SE_DEBUG_NAME失败，可能会导致部分进程无法调试"),NULL,MB_OK | MB_ICONWARNING);
+	}
+
+	//创建主窗口
 	CMainFrame* pFrame = new CMainFrame;
 	if (!pFrame)
 		return FALSE;
@@ -92,13 +123,13 @@ class CAboutDlg : public CDialog
 public:
 	CAboutDlg();
 
-// Dialog Data
+	// Dialog Data
 	enum { IDD = IDD_ABOUTBOX };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-// Implementation
+	// Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
 };

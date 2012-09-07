@@ -31,7 +31,6 @@
     <None Include="res\toolbar1.bmp">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillDBG.h">
