@@ -26,7 +26,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -108,7 +108,9 @@
     <None Include="res\toolbar1.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttachProcessDlg.h" />
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="DBGKernel.h" />
     <ClInclude Include="DebugThread.h" />
     <ClInclude Include="FileOpenDlg.h" />
     <ClInclude Include="KillDBG.h" />
@@ -119,8 +121,13 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AttachProcessDlg.cpp" />
     <ClCompile Include="ChildView.cpp" />
-    <ClCompile Include="DebugThread.cpp" />
+    <ClCompile Include="DBGKernel.cpp" />
+    <ClCompile Include="DebugThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="FileOpenDlg.cpp" />
     <ClCompile Include="KillDBG.cpp" />
     <ClCompile Include="MainFrm.cpp" />

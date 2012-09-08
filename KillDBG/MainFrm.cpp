@@ -4,11 +4,13 @@
 #include "stdafx.h"
 #include "KillDBG.h"
 
+#include "DBGKernel.h"
 #include "MainFrm.h"
 #include "Scintilla.h"
 #include <SciLexer.h>
 #include "FileOpenDlg.h"
 #include "DebugThread.h"
+#include "AttachProcessDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -32,6 +34,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_VIEW_OUTPUT, &CMainFrame::OnViewOutput)
 //	ON_WM_DESTROY()
 ON_COMMAND(ID_FILE_OPEN, &CMainFrame::OnFileOpen)
+ON_COMMAND(ID_FILE_ATTACH, &CMainFrame::OnFileAttach)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -52,7 +55,7 @@ static UINT uHideCmds[] =
 // CMainFrame construction/destruction
 
 CMainFrame::CMainFrame()
-	: m_bExit(false)
+	:m_pDbgKrnl(NULL)
 {
 	// TODO: add member initialization code here
 }
@@ -428,20 +431,38 @@ void CMainFrame::OnFileOpen()
 	if (dlg.DoModal() != IDOK)
 	{
 		return;
-	}
-
-	m_strExePath = dlg.m_strPath;
-	m_strParam = dlg.m_strParam;
-	m_strRunDir = dlg.m_strRunDir;
-	
-	DWORD	dwThreadID;
-	m_hDebugThread = CreateThread(NULL,0,&DebugThreadProc,this,NULL,&dwThreadID);
-	if (m_hDebugThread == INVALID_HANDLE_VALUE)
+	}	
+	m_pDbgKrnl = new CDBGKernel();
+	if (!m_pDbgKrnl->CreateDbgProcess(dlg.m_strPath,dlg.m_strParam,dlg.m_strRunDir))
 	{
-		MessageBox(_T("创建调试线程失败"),NULL,MB_OK | MB_ICONERROR);
-		return;
+		MessageBox(_T("创建调试进程失败"),NULL,MB_OK|MB_ICONERROR);
 	}
 }
 
 
 // 创建可停靠窗口
+
+
+void CMainFrame::OnFileAttach()
+{
+	CAttachProcessDlg	dlg(this);
+
+	if (dlg.DoModal() != IDOK)
+	{
+		return;
+	}
+	m_pDbgKrnl = new CDBGKernel();
+	if (!m_pDbgKrnl->AttachDbgProcess(dlg.m_dwPID))
+	{
+		MessageBox(_T("附加指定进程失败"),NULL,MB_OK|MB_ICONERROR);
+	}
+}
+
+LRESULT CMainFrame::OnDebugStop( WPARAM wParam, LPARAM lParam )
+{
+	if (m_pDbgKrnl)
+	{
+		delete m_pDbgKrnl;
+	}
+	return TRUE;
+}

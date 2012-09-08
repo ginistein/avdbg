@@ -60,6 +60,12 @@
     <ClInclude Include="OutputWnd.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AttachProcessDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DBGKernel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KillDBG.cpp">
@@ -84,6 +90,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="OutputWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachProcessDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DBGKernel.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

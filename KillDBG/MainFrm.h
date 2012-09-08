@@ -8,6 +8,10 @@
 #include "ScintillaWnd.h"
 #include "OutputWnd.h"
 
+#define		WM_USER_DEBUGSTOP	WM_USER+1
+
+class CDBGKernel;
+
 class CMainFrame : public CXTPFrameWnd
 {
 
@@ -20,11 +24,6 @@ protected:
 public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
-
-	HANDLE	m_hDebugThread;
-	CString	m_strExePath;
-	CString	m_strParam;
-	CString m_strRunDir;
 
 	CXTPOfficeBorder<CScintillaWnd> m_wndRegister;
 	//CXTPOfficeBorder<CEdit> m_wndProperties;
@@ -60,8 +59,10 @@ public:
 	afx_msg void OnViewOutput();
 //	afx_msg void OnDestroy();
 	afx_msg void OnFileOpen();
-	// 系统是否退出
-	bool m_bExit;
 	// 创建可停靠窗口
 	BOOL SetupDockPane(void);
+	afx_msg void OnFileAttach();
+	afx_msg LRESULT OnDebugStop(WPARAM wParam, LPARAM lParam);
+	// 调试模块
+	CDBGKernel* m_pDbgKrnl;
 };

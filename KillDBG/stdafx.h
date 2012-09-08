@@ -75,3 +75,4 @@
 #include <afxcontrolbars.h>
 
 #include <psapi.h>
+#include <TlHelp32.h>

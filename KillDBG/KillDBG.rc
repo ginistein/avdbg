@@ -106,7 +106,8 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "打开",                          ID_FILE_OPEN
+        MENUITEM "打开...",                       ID_FILE_OPEN
+        MENUITEM "附加进程...",                     ID_FILE_ATTACH
         MENUITEM "E&xit",                       ID_APP_EXIT
     END
     POPUP "&Edit"
@@ -191,6 +192,16 @@ BEGIN
     EDITTEXT        IDC_EDITRUNDIR,47,46,184,14,ES_AUTOHSCROLL
 END
 
+IDD_DIALOGATTACH DIALOGEX 0, 0, 342, 230
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "请选择要附加的进程.."
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,205,209,50,14
+    PUSHBUTTON      "取消",IDCANCEL,285,209,50,14
+    CONTROL         "",IDC_LISTPROCESS,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,328,196
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -253,6 +264,14 @@ BEGIN
         RIGHTMARGIN, 249
         TOPMARGIN, 7
         BOTTOMMARGIN, 78
+    END
+
+    IDD_DIALOGATTACH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 335
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 223
     END
 END
 #endif    // APSTUDIO_INVOKED
