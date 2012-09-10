@@ -7,7 +7,7 @@ CDBGKernel::CDBGKernel(void)
 	:m_bAttach(FALSE),
 	m_bExit(FALSE),
 	m_dwPID(0),
-	m_hDbgProcess(NULL),
+// 	m_hDbgProcess(NULL),
 	m_hDebugThread(NULL),
 	m_pMainFrm(NULL)
 {
@@ -17,11 +17,11 @@ CDBGKernel::CDBGKernel(void)
 
 CDBGKernel::~CDBGKernel(void)
 {
-	if (m_hDbgProcess && m_hDbgProcess != INVALID_HANDLE_VALUE)
-	{
-		CloseHandle(m_hDbgProcess);
-		m_hDbgProcess = NULL;
-	}
+// 	if (m_hDbgProcess && m_hDbgProcess != INVALID_HANDLE_VALUE)
+// 	{
+// 		CloseHandle(m_hDbgProcess);
+// 		m_hDbgProcess = NULL;
+// 	}
 	if (m_hDebugThread && m_hDebugThread != INVALID_HANDLE_VALUE)
 	{
 		CloseHandle(m_hDebugThread);
@@ -44,7 +44,7 @@ BOOL CDBGKernel::CreateDbgProcess( CString strExePath, CString strParam, CString
 	DWORD dwThreadID;
 	m_hDebugThread = CreateThread(NULL,0,&DebugThreadProc,this,NULL,&dwThreadID);
 
-	return m_hDebugThread == INVALID_HANDLE_VALUE;
+	return m_hDebugThread != INVALID_HANDLE_VALUE;
 }
 
 BOOL CDBGKernel::AttachDbgProcess( DWORD dwPID )
@@ -150,6 +150,7 @@ DWORD WINAPI CDBGKernel::DebugThreadProc( LPVOID lpParameter )
 	CDBGKernel*	pDBGKrnl = (CDBGKernel*)lpParameter;
 	if (pDBGKrnl->m_bAttach)
 	{
+		DebugSetProcessKillOnExit(FALSE);
 		if (!DebugActiveProcess(pDBGKrnl->m_dwPID))
 		{
 			pDBGKrnl->m_pMainFrm->MessageBox(_T("附加指定进程失败！！"),NULL,MB_OK | MB_ICONERROR);
@@ -170,8 +171,8 @@ DWORD WINAPI CDBGKernel::DebugThreadProc( LPVOID lpParameter )
 			pDBGKrnl->m_pMainFrm->MessageBox(_T("创建调试进程失败！！"),NULL,MB_OK | MB_ICONERROR);
 			return 1;
 		}
-		pDBGKrnl->m_hDbgProcess = pi.hProcess;
-// 		CloseHandle(pi.hThread);
+// 		pDBGKrnl->m_hDbgProcess = pi.hProcess;
+ 		CloseHandle(pi.hThread);
  		CloseHandle(pi.hProcess);
 	}
 	DEBUG_EVENT DBGEvent;
@@ -181,18 +182,18 @@ DWORD WINAPI CDBGKernel::DebugThreadProc( LPVOID lpParameter )
 		WaitForDebugEvent(&DBGEvent,INFINITE);
 
 		BOOL	bContinue = TRUE;
-		switch(DBGEvent.dwDebugEventCode)	//we just cleanup here, but this method may have performance issue
+		switch(DBGEvent.dwDebugEventCode)
 		{
 		case CREATE_PROCESS_DEBUG_EVENT:	//创建被调试进程
 			bContinue = pDBGKrnl->CreateProcessEvent(&DBGEvent.u.CreateProcessInfo);
 			break;
 
-		case CREATE_THREAD_DEBUG_EVENT:
-			bContinue = pDBGKrnl->CreateThreadEvent(&DBGEvent.u.CreateThread);
-			break;
-
 		case EXIT_PROCESS_DEBUG_EVENT:
 			bContinue = pDBGKrnl->ExitProcessEvent(&DBGEvent.u.ExitProcess);
+			break;
+
+		case CREATE_THREAD_DEBUG_EVENT:
+			bContinue = pDBGKrnl->CreateThreadEvent(&DBGEvent.u.CreateThread);
 			break;
 
 		case EXIT_THREAD_DEBUG_EVENT:
@@ -208,7 +209,7 @@ DWORD WINAPI CDBGKernel::DebugThreadProc( LPVOID lpParameter )
 			break;
 
 		case OUTPUT_DEBUG_STRING_EVENT:
-			bContinue = pDBGKrnl->OutputDebugStringEvent(&DBGEvent.u.DebugString);
+			bContinue = pDBGKrnl->OutputDebugStringEvent(&DBGEvent.u.DebugString,DBGEvent.dwProcessId);
 			break;
 
 		case RIP_EVENT:
@@ -219,7 +220,9 @@ DWORD WINAPI CDBGKernel::DebugThreadProc( LPVOID lpParameter )
 			bContinue = pDBGKrnl->ExceptionEvent(&DBGEvent.u.Exception);
 			break;
 		}
-		ContinueDebugEvent(DBGEvent.dwProcessId, DBGEvent.dwThreadId, bContinue?DBG_CONTINUE:DBG_EXCEPTION_HANDLED);
+		BOOL bRet = ContinueDebugEvent(DBGEvent.dwProcessId, DBGEvent.dwThreadId, bContinue?DBG_CONTINUE:DBG_EXCEPTION_HANDLED);
+		assert(bRet);
+
 	}
 
 	pDBGKrnl->m_pMainFrm->SendMessage(WM_USER_DEBUGSTOP);
@@ -249,14 +252,18 @@ BOOL CDBGKernel::CreateThreadEvent( CREATE_THREAD_DEBUG_INFO* CreateThread )
 
 BOOL CDBGKernel::ExitProcessEvent( EXIT_PROCESS_DEBUG_INFO* ExitProcess )
 {
-	m_pMainFrm->m_wndOutput.SendMessage(SCI_APPENDTEXT,15,(LPARAM)"被调试进程退出\n");
+	TCHAR	szOut[100];
+	_stprintf(szOut,"被调试进程退出,退出代码为:%d\n",ExitProcess->dwExitCode);
+	m_pMainFrm->m_wndOutput.SendMessage(SCI_APPENDTEXT,_tcslen(szOut),(LPARAM)szOut);
 	m_bExit = true;
-	return TRUE;
+	return FALSE;
 }
 
 BOOL CDBGKernel::ExitThreadEvent( EXIT_THREAD_DEBUG_INFO* ExitThread )
 {
-
+	TCHAR	szOut[100];
+	_stprintf(szOut,"线程退出,退出代码为:%d\n",ExitThread->dwExitCode);
+	m_pMainFrm->m_wndOutput.SendMessage(SCI_APPENDTEXT,_tcslen(szOut),(LPARAM)szOut);
 	return TRUE;
 }
 
@@ -280,7 +287,7 @@ BOOL CDBGKernel::UnLoadDllEvent( UNLOAD_DLL_DEBUG_INFO* UnloadDll )
 	return TRUE;
 }
 
-BOOL CDBGKernel::OutputDebugStringEvent( OUTPUT_DEBUG_STRING_INFO* DebugString )
+BOOL CDBGKernel::OutputDebugStringEvent( OUTPUT_DEBUG_STRING_INFO* DebugString, DWORD dwPID )
 {
 	int nStrByte = DebugString->nDebugStringLength;		//字符串的长度（字节）
 	BYTE* pBuffer = new BYTE[nStrByte];
@@ -288,8 +295,10 @@ BOOL CDBGKernel::OutputDebugStringEvent( OUTPUT_DEBUG_STRING_INFO* DebugString )
 
 	SIZE_T bytesRead;
 
-	ReadProcessMemory(m_hDbgProcess,DebugString->lpDebugStringData,
+	HANDLE hDbgProcess = OpenProcess(PROCESS_VM_READ,FALSE,dwPID);
+	ReadProcessMemory(hDbgProcess,DebugString->lpDebugStringData,
 		pBuffer, DebugString->nDebugStringLength,&bytesRead);
+	CloseHandle(hDbgProcess);
 
 	//据说这里永远是多字节字符，
 	//这个if里面的东西永远也执行不到

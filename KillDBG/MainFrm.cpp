@@ -33,8 +33,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_VIEW_STACK, &CMainFrame::OnViewStack)
 	ON_COMMAND(ID_VIEW_OUTPUT, &CMainFrame::OnViewOutput)
 //	ON_WM_DESTROY()
-ON_COMMAND(ID_FILE_OPEN, &CMainFrame::OnFileOpen)
-ON_COMMAND(ID_FILE_ATTACH, &CMainFrame::OnFileAttach)
+	ON_COMMAND(ID_FILE_OPEN, &CMainFrame::OnFileOpen)
+	ON_COMMAND(ID_FILE_ATTACH, &CMainFrame::OnFileAttach)
+	ON_UPDATE_COMMAND_UI(ID_FILE_OPEN, &CMainFrame::OnUpdateFileOpen)
+	ON_UPDATE_COMMAND_UI(ID_FILE_ATTACH, &CMainFrame::OnUpdateFileAttach)
+	ON_MESSAGE(WM_USER_DEBUGSTOP, &CMainFrame::OnDebugStop)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -384,7 +387,8 @@ LRESULT CMainFrame::OnDockingPaneNotify(WPARAM wParam, LPARAM lParam)
 			}
 			return TRUE;
 		}
-	}	return FALSE;
+	}
+	return FALSE;
 }
 
 
@@ -463,6 +467,25 @@ LRESULT CMainFrame::OnDebugStop( WPARAM wParam, LPARAM lParam )
 	if (m_pDbgKrnl)
 	{
 		delete m_pDbgKrnl;
+		m_pDbgKrnl = NULL;
 	}
-	return TRUE;
+	return FALSE;
+}
+
+void CMainFrame::OnUpdateFileOpen(CCmdUI *pCmdUI)
+{
+	if (m_pDbgKrnl)
+	{
+		pCmdUI->Enable(FALSE);
+	}
+	else
+	{
+		pCmdUI->Enable(TRUE);
+	}
+}
+
+
+void CMainFrame::OnUpdateFileAttach(CCmdUI *pCmdUI)
+{
+	OnUpdateFileOpen(pCmdUI);
 }

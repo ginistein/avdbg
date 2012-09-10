@@ -23,7 +23,7 @@ public:
 
 	BOOL	m_bExit;
 
-	HANDLE	m_hDbgProcess;
+// 	HANDLE	m_hDbgProcess;
 
 	BOOL CreateProcessEvent(CREATE_PROCESS_DEBUG_INFO* CreateProcessInfo);
 	BOOL CreateThreadEvent(CREATE_THREAD_DEBUG_INFO* CreateThread);
@@ -31,7 +31,7 @@ public:
 	BOOL ExitThreadEvent(EXIT_THREAD_DEBUG_INFO* ExitThread);
 	BOOL LoadDllEvent(LOAD_DLL_DEBUG_INFO* LoadDll);
 	BOOL UnLoadDllEvent(UNLOAD_DLL_DEBUG_INFO* UnloadDll);
-	BOOL OutputDebugStringEvent(OUTPUT_DEBUG_STRING_INFO* DebugString);
+	BOOL OutputDebugStringEvent(OUTPUT_DEBUG_STRING_INFO* DebugString, DWORD dwPID);
 	BOOL RipEvent(RIP_INFO* RipInfo);
 	BOOL ExceptionEvent(EXCEPTION_DEBUG_INFO* Exception);
 

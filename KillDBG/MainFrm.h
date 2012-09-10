@@ -65,4 +65,6 @@ public:
 	afx_msg LRESULT OnDebugStop(WPARAM wParam, LPARAM lParam);
 	// µ÷ÊÔÄ£¿é
 	CDBGKernel* m_pDbgKrnl;
+	afx_msg void OnUpdateFileOpen(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateFileAttach(CCmdUI *pCmdUI);
 };

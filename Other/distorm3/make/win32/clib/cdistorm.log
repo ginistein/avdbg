@@ -1,0 +1,39 @@
+﻿生成启动时间为 2012-9-8 10:01:07。
+项目“F:\project\distorm3\make\win32\cdistorm.vcxproj”在节点 2 上(build 个目标)。
+InitializeBuildStatus:
+  正在创建“clib\distorm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  D:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /Ox /Ob2 /Ot /Oy /D WIN32 /D NDEBUG /D DISTORM_STATIC /D SUPPORT_64BIT_OFFSET /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"clib\\" /Fd"distorm.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\src\decoder.c ..\..\src\distorm.c ..\..\src\instructions.c ..\..\src\insts.c ..\..\src\mnemonics.c ..\..\src\operands.c ..\..\src\prefix.c ..\..\src\textdefs.c ..\..\src\wstring.c
+  wstring.c
+  textdefs.c
+  prefix.c
+..\..\src\prefix.c : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  operands.c
+  mnemonics.c
+  insts.c
+  instructions.c
+  distorm.c
+  decoder.c
+  正在生成代码...
+ResourceCompile:
+  C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _VC80_UPGRADE=0x0710 /l"0x0409" /nologo /fo"clib\resource.res" resource.rc 
+Lib:
+  D:\Program Files\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"F:\project\distorm3\make\win32\..\..\distorm.lib" /NOLOGO /MACHINE:X86 clib\resource.res
+  clib\decoder.obj
+  clib\distorm.obj
+  clib\instructions.obj
+  clib\insts.obj
+  clib\mnemonics.obj
+  clib\operands.obj
+  clib\prefix.obj
+  clib\textdefs.obj
+  clib\wstring.obj
+  cdistorm.vcxproj -> F:\project\distorm3\make\win32\..\..\distorm.lib
+FinalizeBuildStatus:
+  正在删除文件“clib\distorm.unsuccessfulbuild”。
+  正在对“clib\distorm.lastbuildstate”执行 Touch 任务。
+已完成生成项目“F:\project\distorm3\make\win32\cdistorm.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:03.34
