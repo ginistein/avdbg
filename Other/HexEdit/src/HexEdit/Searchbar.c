@@ -1,4 +1,4 @@
-//
+﻿//
 //  Searchbar.c
 //
 //  www.catch22.net
@@ -321,7 +321,7 @@ HWND CreateSearchBar(HWND hwndParent)
 	SendMessage(hwndTB1, TB_SETEXTENDEDSTYLE, 0, TBSTYLE_EX_MIXEDBUTTONS|TBSTYLE_EX_DRAWDDARROWS);
 
 	GetWindowWidth(hwndTB1);
-	AddButton(hwndTB1, -0, 3, TBSTYLE_BUTTON, TEXT("Goto ?"));
+	AddButton(hwndTB1, -0, 3, TBSTYLE_BUTTON, TEXT("Goto »"));
 	GetWindowWidth(hwndTB1);
 	ResizeToolbar(hwndTB1);
 	GetWindowWidth(hwndTB1);

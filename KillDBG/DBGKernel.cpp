@@ -221,7 +221,7 @@ DWORD WINAPI CDBGKernel::DebugThreadProc( LPVOID lpParameter )
 			break;
 		}
 		BOOL bRet = ContinueDebugEvent(DBGEvent.dwProcessId, DBGEvent.dwThreadId, bContinue?DBG_CONTINUE:DBG_EXCEPTION_HANDLED);
-		assert(bRet);
+		ASSERT(bRet);
 
 	}
 

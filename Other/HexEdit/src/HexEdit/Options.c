@@ -48,7 +48,7 @@ HFONT EasyCreateFont(TCHAR *szName, int pointSize)
 	HFONT hFont;
 
 	int lfHeight = -MulDiv(pointSize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
-	hFont = CreateFont(lfHeight, 0, 0, 0, /*bold ? FW_BOLD : */FW_NORMAL, 0, 0, 0, 0, 0, 0, 0, 0, szName);
+	hFont = CreateFont(lfHeight, 0, 0, 0, /*bold ? FW_BOLD :*/ FW_NORMAL, 0, 0, 0, 0, 0, 0, 0, 0, szName);
 
 	ReleaseDC(0, hdc);
 	return hFont;
