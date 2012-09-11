@@ -137,7 +137,7 @@ CFunc*	Cexe2c::FindFuncByName(PSTR pname)	// 查找函数名称
     while (pos != NULL)
     {
         CFunc* p = m_func_list->GetNext(pos);
-        if (stricmp(p->m_funcname,pname) == 0)
+        if (_stricmp(p->m_funcname,pname) == 0)
             return p;
     }
     return NULL;
@@ -496,7 +496,7 @@ static DWORD str_to_dword(PSTR cmd)	// 字符串转换为数值
     char buf[80];
     strncpy(buf, cmd, 70);
     buf[70] = 0;
-    strupr(buf);
+    _strupr(buf);
     if (buf[0] == '0' && buf[1] == 'X')
     {
         DWORD d;

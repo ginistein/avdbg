@@ -38,7 +38,8 @@ PINSTR findlabel(INSTR_LIST* list, ea_t off)
 		if (p->type == i_Label && p->label.label_off == off)
 			return p;
 	}
-	assert_msg(0,"why here");
+	//assert_msg(0,"why here");
+	MessageBox(NULL,"why here",NULL,MB_OK);
 	return NULL;
 }
 

@@ -1119,7 +1119,8 @@ AsmCode* ea2pasm(ea_t ea, AsmCodeList* m_asmlist)	//
 		if (p->linear == ea)
 			return p;
 	}
-	assert_msg(0,"取指定地址的反汇编信息出错！");
+	//assert_msg(0,"取指定地址的反汇编信息出错！");
+	MessageBox(NULL,"取指定地址的反汇编信息出错！",NULL,MB_OK);
 	return NULL;
 }
 

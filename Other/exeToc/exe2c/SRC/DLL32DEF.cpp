@@ -149,10 +149,10 @@ void Def_BuildList(ORD_LIST * list, PSTR pbuf, SIZEOF len)
 	PSTR p = pbuf;
 	while (*p == ';')
 		p += strlen(p)+1;
-    if (memicmp(p,"LIBRARY",7) != 0)
+    if (_memicmp(p,"LIBRARY",7) != 0)
 		return;
     p += strlen(p)+1;
-	if (memicmp(p,"EXPORTS",7) != 0)
+	if (_memicmp(p,"EXPORTS",7) != 0)
 		return;
     p += strlen(p)+1;
     //	now, really

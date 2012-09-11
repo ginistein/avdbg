@@ -255,7 +255,7 @@ BOOL __stdcall CLibScanner::ScanLib(LPCSTR szLib)	// É¨Ãè¿âÎÄ¼þ
         log_prtl("Load error: file not find %s", szLib);
 		return FALSE;
 	}
-	long fsize = _filelength(fileno(pFile));
+	long fsize = _filelength(_fileno(pFile));
 
 	PBYTE fbuf = new BYTE[fsize];
 	if (fbuf == NULL)

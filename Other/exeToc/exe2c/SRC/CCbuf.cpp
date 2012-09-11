@@ -27,7 +27,7 @@ CCbuf::~CCbuf()
 
 void CCbuf::LoadFile(FILE *f)
 {
-	long flen = filelength(fileno(f));	// 文件长度
+	long flen = _filelength(_fileno(f));	// 文件长度
 	char *buf = new char[flen];
 	fread(buf,1,flen,f);				// 文件读入缓冲区
 	
