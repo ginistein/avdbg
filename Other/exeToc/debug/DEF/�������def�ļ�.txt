@@ -1,0 +1,6 @@
+1、vs目录下面有一些
+
+
+可以使用impdef.exe程序从dll中导出def文件，命令行格式如下：
+
+impdef.exe comctl32.def comctl32.dll

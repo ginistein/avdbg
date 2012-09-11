@@ -1,0 +1,23 @@
+This is ExeToC Decompiler first release version.
+
+http://sourceforge.net/projects/exetoc
+
+
+Have a try:
+	run exe2c_gui.exe
+	load petest.exe
+	select a function and press button "optim"
+
+
+LiuTaoTao 
+bookaa@rorsoft.com
+2005.5.24
+
+Have a try:
+	run exe2c_gui.exe
+	load petest.exe
+        select a function and press button "go" or "optim"
+
+
+ºì³¾ËêÔÂ
+2011.06.07

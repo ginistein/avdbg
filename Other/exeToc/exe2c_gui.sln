@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exe2c_gui", "exe2c_gui\exe2c_gui.vcproj", "{023E43DF-A3A9-4A04-8B28-389E6DB4494C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7EBC4171-33EB-48DB-9932-599EEF8E46AA} = {7EBC4171-33EB-48DB-9932-599EEF8E46AA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exe2c", "exe2c\DLL\exe2c.vcproj", "{7EBC4171-33EB-48DB-9932-599EEF8E46AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{023E43DF-A3A9-4A04-8B28-389E6DB4494C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{023E43DF-A3A9-4A04-8B28-389E6DB4494C}.Debug|Win32.Build.0 = Debug|Win32
+		{023E43DF-A3A9-4A04-8B28-389E6DB4494C}.Release|Win32.ActiveCfg = Release|Win32
+		{023E43DF-A3A9-4A04-8B28-389E6DB4494C}.Release|Win32.Build.0 = Release|Win32
+		{7EBC4171-33EB-48DB-9932-599EEF8E46AA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7EBC4171-33EB-48DB-9932-599EEF8E46AA}.Debug|Win32.Build.0 = Debug|Win32
+		{7EBC4171-33EB-48DB-9932-599EEF8E46AA}.Release|Win32.ActiveCfg = Release|Win32
+		{7EBC4171-33EB-48DB-9932-599EEF8E46AA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
