@@ -4,6 +4,8 @@
 
 #pragma once
 
+#define  _CRT_SECURE_NO_WARNINGS
+
 #ifndef _SECURE_ATL
 #define _SECURE_ATL 1
 #endif
@@ -76,3 +78,5 @@
 
 #include <psapi.h>
 #include <TlHelp32.h>
+#include <DbgHelp.h>
+// #include <ImageHlp.h>

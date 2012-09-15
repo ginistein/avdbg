@@ -295,10 +295,18 @@ BOOL CDBGKernel::OutputDebugStringEvent( OUTPUT_DEBUG_STRING_INFO* DebugString, 
 
 	SIZE_T bytesRead;
 
-	HANDLE hDbgProcess = OpenProcess(PROCESS_VM_READ,FALSE,dwPID);
-	ReadProcessMemory(hDbgProcess,DebugString->lpDebugStringData,
-		pBuffer, DebugString->nDebugStringLength,&bytesRead);
-	CloseHandle(hDbgProcess);
+// 	HANDLE hDbgProcess = OpenProcess(PROCESS_VM_READ,FALSE,dwPID);
+// 	ReadProcessMemory(hDbgProcess,DebugString->lpDebugStringData,
+// 		pBuffer, DebugString->nDebugStringLength,&bytesRead);
+// 	CloseHandle(hDbgProcess);
+
+	if (!Toolhelp32ReadProcessMemory(dwPID,DebugString->lpDebugStringData,pBuffer,
+		DebugString->nDebugStringLength,&bytesRead))
+	{
+		strcpy(szOutString,_T("获取调试字符串失败"));
+		m_pMainFrm->m_wndOutput.SendMessage(SCI_APPENDTEXT,strlen(szOutString),(LPARAM)szOutString);
+		return TRUE;
+	}
 
 	//据说这里永远是多字节字符，
 	//这个if里面的东西永远也执行不到

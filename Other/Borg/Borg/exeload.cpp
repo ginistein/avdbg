@@ -630,7 +630,7 @@ void fileloader::readpefile(dword peoffs)
 			if(pdata[i].rva==peh->resourcetable_rva)
 				peobjdone=true;
 		}
-		if(pdata[i].rva==peh->fixuptable_rva) // fixup info
+		if(pdata[i].rva==peh->fixuptable_rva) // fixup info 重定位表
 		{
 			per=(perelocheader *)&fbuff[pdata[i].phys_offset];
 			while(per->rva)
@@ -648,7 +648,7 @@ void fileloader::readpefile(dword peoffs)
 			}
 			peobjdone=true;
 		}
-		if(pdata[i].rva==peh->debugtable_rva) // debug info
+		if(pdata[i].rva==peh->debugtable_rva) // debug info 调试信息表
 		{
 			// DEBUG_DATA;
 			if((pdata[i].phys_size)&&(g_options.loaddebug))

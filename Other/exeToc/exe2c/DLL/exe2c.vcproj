@@ -1292,5 +1292,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="exe2c_DLL.rc"
+		/>
 	</Globals>
 </VisualStudioProject>
