@@ -73,7 +73,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <XTToolkitPro.h>    // Xtreme Toolkit Pro components
+#include <XTP/Source/XTToolkitPro.h>
 #include <afxcontrolbars.h>
 
 #include <psapi.h>

@@ -93,7 +93,7 @@ BOOL CDBGKernel::GetFileNameFromHandle( HANDLE hFile, TCHAR* pszFilename )
 
 				// Translate path with device name to drive letters.
 				TCHAR szTemp[512];
-				szTemp[0] = '/0';
+				szTemp[0] = '\0';
 
 				if (GetLogicalDriveStrings(512-1, szTemp)) 
 				{

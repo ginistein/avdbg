@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Scintilla.h>
+#include <scintilla/Scintilla.h>
 // CScintillaWnd
 
 class CScintillaWnd : public CWnd

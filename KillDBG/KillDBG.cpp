@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "KillDBG.h"
 #include "MainFrm.h"
-#include <Scintilla.h>
+#include <scintilla/Scintilla.h>
 
 
 #ifdef _DEBUG

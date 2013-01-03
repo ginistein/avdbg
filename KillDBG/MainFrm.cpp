@@ -6,8 +6,8 @@
 
 #include "DBGKernel.h"
 #include "MainFrm.h"
-#include "Scintilla.h"
-#include <SciLexer.h>
+#include "scintilla/Scintilla.h"
+#include <scintilla/SciLexer.h>
 #include "FileOpenDlg.h"
 #include "DebugThread.h"
 #include "AttachProcessDlg.h"

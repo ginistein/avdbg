@@ -104,38 +104,38 @@ IDR_MAINFRAME           ICON                    "res\\KillDBG.ico"
 
 IDR_MAINFRAME MENU
 BEGIN
-    POPUP "&File"
+    POPUP "文件(&F)"
     BEGIN
         MENUITEM "打开...",                       ID_FILE_OPEN
         MENUITEM "附加进程...",                     ID_FILE_ATTACH
-        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM "退出(&X)",                      ID_APP_EXIT
     END
-    POPUP "&Edit"
+    POPUP "编辑(&E)"
     BEGIN
-        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "撤销(&U)\tCtrl+Z",              ID_EDIT_UNDO
         MENUITEM SEPARATOR
-        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
-        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
-        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "粘贴(&P)\tCtrl+V",              ID_EDIT_PASTE
     END
-    POPUP "&View"
+    POPUP "视图(&V)"
     BEGIN
         MENUITEM "反汇编窗口",                       ID_BUTTONDISWND
         MENUITEM "寄存器窗口",                       ID_VIEW_REGISTER
         MENUITEM "输出窗口",                        ID_VIEW_OUTPUT
         MENUITEM "内存窗口",                        ID_VIEW_MEMORY
         MENUITEM "堆栈窗口",                        ID_VIEW_STACK
-        POPUP "&Toolbars"
+        POPUP "工具栏(&T)"
         BEGIN
-            MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+            MENUITEM "工具栏(&T)",                     ID_VIEW_TOOLBAR
             MENUITEM SEPARATOR
-            MENUITEM "&Customize...",               35001
+            MENUITEM "自定义(&C)...",                  35001
         END
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
     END
-    POPUP "&Help"
+    POPUP "帮助(&H)"
     BEGIN
-        MENUITEM "&About KillDBG...",           ID_APP_ABOUT
+        MENUITEM "关于 KillDBG(&A)...",           ID_APP_ABOUT
     END
 END
 
